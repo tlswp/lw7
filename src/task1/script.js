@@ -12,6 +12,17 @@ window.onload = function() {
     }
   }
 
+  function removeElement(element) {
+    var elementPosition = listingElements.indexOf(element);
+    if (elementPosition > -1) {
+      listingElements.splice(elementPosition, 1);
+    }
+    elementPosition = storeElements.indexOf(element);
+    if (elementPosition > -1) {
+      storeElements.splice(elementPosition, 1);
+    }
+  }
+
   function clearAll() {
     listingElements = [];
     storeElements = [];
@@ -50,11 +61,17 @@ window.onload = function() {
   var addButton = document.querySelector('#add-button'),
     clearAllButton = document.querySelector('.clear-all'),
     addToListingButton = document.querySelector('.add-listing-button'),
-    sortStoreButton = document.querySelector('.sort-store');
+    sortStoreButton = document.querySelector('.sort-store'),
+    removeElementButton = document.querySelector('.remove-element');
 
   addButton.onclick = function() {
     var selectedOption = document.querySelector('.listing-select option:checked');
     addToStoreElements(selectedOption.innerText);
+    updateUI();
+  };
+  removeElementButton.onclick = function() {
+    var selectedOption = document.querySelector('.app option:checked');
+    removeElement(selectedOption.innerText);
     updateUI();
   };
   clearAllButton.onclick = function() {
