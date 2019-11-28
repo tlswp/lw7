@@ -1,5 +1,7 @@
 'use strict';
 import './style.css';
+import './lodash.js';
+
 window.onload = function() {
 
   var listingElements = ['apple', 'orange'];
@@ -42,23 +44,29 @@ window.onload = function() {
   function updateUI() {
     var storeSelect = document.querySelector('.store-select');
     var listingSelect = document.querySelector('.listing-select');
-    storeSelect.innerHTML = '';
-    listingSelect.innerHTML = '';
-    var newOption, i;
+    var listingSelectString = '<select size="10" class="listing-select">' +
+      '<% listingItems.forEach(function(item) { %>' +
+      '<option><%-item%></option>' +
+      '<% }); %>' +
+      '</select>';
+    var storeSelectString = '<select size="10" class="store-select">' +
+      '<% storeItems.forEach(function(item) { %>' +
+      '<option><%-item%></option>' +
+      '<% }); %>' +
+      '</select>';
 
-    for (i = 0; i < listingElements.length; i++) {
-      newOption = document.createElement('option');
-      newOption.innerText = listingElements[i];
-      listingSelect.append(newOption);
-    }
+    var storeSelectHTML = _.template(storeSelectString)({
+      storeItems: storeElements
+    });
 
-    for (i = 0; i < storeElements.length; i++) {
-      newOption = document.createElement('option');
-      newOption.innerText = storeElements[i];
-      storeSelect.append(newOption);
-    }
+    var listingSelectHTML = _.template(listingSelectString)({
+      listingItems: listingElements
+    });
+
+    storeSelect.innerHTML = storeSelectHTML;
+    listingSelect.innerHTML = listingSelectHTML;
   }
-
+  updateUI();
   var addButton = document.querySelector('#add-button'),
     clearAllButton = document.querySelector('.clear-all'),
     addToListingButton = document.querySelector('.add-listing-button'),

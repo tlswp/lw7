@@ -13,14 +13,18 @@
       <div class="listing-block">
         <p>Listing:</p>
         <select size="10" class="listing-select">
-        <option>apple</option>
-        <option>orange</option>
+        <% listingItems.forEach(function(item) { %>
+          <option><%-item%></option>
+        <% }); %>
       </select>
       </div>
 
       <div class="store-block">
         <p>Store:</p>
         <select size="10" class="store-select">
+        <% storeItems.forEach(function(item) { %>
+          <option><%-item%></option>
+        <% }); %>
       </select>
       </div>
     </div>
