@@ -7,7 +7,7 @@ module.exports = {
   },
   output: {
     filename: '[name].min.js',
-    path: path.resolve(__dirname, './src/build'),
+    path: path.resolve(__dirname, './build'),
     publicPath: '/build'
   },
   module: {
@@ -36,8 +36,8 @@ module.exports = {
       filename: '[name].min.css',
     }),
     new HtmlWebpackPlugin({
-      inject: false,
-      hash: true,
+      inject: true,
+      hash: false,
       filename: 'index.html',
       template: './src/index.html'
     })
