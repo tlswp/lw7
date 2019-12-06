@@ -1,6 +1,6 @@
 'use strict';
 import './style.css';
-import './lodash.js';
+var _ = require('lodash');
 
 window.onload = function() {
 

@@ -1,14 +1,14 @@
 const path = require('path');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlReplaceWebpackPlugin = require('html-replace-webpack-plugin');
 module.exports = {
   entry: {
     app: './src/script.js',
   },
   output: {
     filename: '[name].min.js',
-    path: path.resolve(__dirname, './build'),
-    publicPath: '/build'
+    path: path.resolve(__dirname, './build')
   },
   module: {
     rules: [{
@@ -33,13 +33,22 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].min.css',
+      filename: '[name].min.css'
     }),
     new HtmlWebpackPlugin({
-      inject: true,
+      inject: false,
       hash: false,
       filename: 'index.html',
       template: './src/index.html'
-    })
+    }),
+    new HtmlReplaceWebpackPlugin([{
+        pattern: 'href="style.css"',
+        replacement: 'href="app.min.css"'
+      },
+      {
+        pattern: 'src="script.js"',
+        replacement: 'src="app.min.js"'
+      }
+    ])
   ]
 }
