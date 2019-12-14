@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "watch": {
-    "validate-html": {
+    "validate-html-build": {
       "patterns": [
         "src"
       ],
@@ -12,18 +12,22 @@
       "quiet": true,
       "legacyWatch": true
     },
-    "validate-css": "src/style.css",
-    "jshint": "src/"
+    "validate-css-build": "src/style.css",
+    "jshint-build": "src/"
   },
   "scripts": {
-    "server": "live-server src",
+    "server": "live-server build",
     "validate-html": "html-validate src",
     "validate-css": "css-validator src/style.css",
     "jshint": "jshint src/",
+    "validate-html-build": "npm-run-all --parallel validate-html build",
+    "validate-css-build": "npm-run-all --parallel validate-css build",
+    "jshint-build": "npm-run-all --parallel jshint build",
     "watch": "npm-watch",
     "dev-mode": "npm-run-all --parallel server watch",
     "postinstall": "npm i -g live-server css-validator html-validate jshint",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "validate-build": "npm-run-all --parallel validate-css validate-html jshint build"
   },
   "author": "Kalagin Ivan",
   "license": "ISC",
