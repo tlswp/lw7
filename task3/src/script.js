@@ -40,7 +40,6 @@ window.onload = function() {
     storeElements.sort();
   }
 
-
   function updateUI() {
     var storeSelect = document.querySelector('.store-select');
     var listingSelect = document.querySelector('.listing-select');

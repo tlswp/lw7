@@ -36,18 +36,18 @@ module.exports = {
       filename: '[name].min.css'
     }),
     new HtmlWebpackPlugin({
-      inject: false,
+      inject: true,
       hash: false,
       filename: 'index.html',
       template: './src/index.html'
     }),
     new HtmlReplaceWebpackPlugin([{
-        pattern: 'href="style.css"',
-        replacement: 'href="app.min.css"'
+        pattern: '<link rel="stylesheet" href="style.css">',
+        replacement: ''
       },
       {
-        pattern: 'src="script.js"',
-        replacement: 'src="app.min.js"'
+        pattern: '<script src="script.js"></script>',
+        replacement: ''
       }
     ])
   ]
